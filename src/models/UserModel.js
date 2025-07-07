@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
+const BaseModel = require('./BaseModel');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -61,4 +62,12 @@ UserSchema.path('password').validate((password) => {
     });
 }, 'Password must be at least 8 characters long and contain at least one lowercase, one uppercase, one number, and one symbol');
 
-module.exports = mongoose.model('User', UserSchema); 
+const User = mongoose.model('User', UserSchema);
+
+class UserModel extends BaseModel {
+    constructor() {
+        super(User);
+    }
+}
+
+module.exports = new UserModel();
