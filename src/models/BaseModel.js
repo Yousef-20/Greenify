@@ -19,12 +19,20 @@ class BaseModel {
         return await this.model.find(query);
     }
 
+    async findSelect(query = {}, selectFields) {
+        return await this.model.find(query).select(selectFields);
+    }
+
     async updateById(id, data) {
         return await this.model.findByIdAndUpdate(id, data, { new: true });
     }
 
     async deleteById(id) {
         return await this.model.findByIdAndDelete(id);
+    }
+
+    async findByIdSelect(id, selectFields) {
+        return await this.model.findById(id).select(selectFields);
     }
 
     // Expose the Mongoose model directly for methods like `select`

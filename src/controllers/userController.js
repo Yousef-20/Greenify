@@ -74,7 +74,7 @@ class UserController {
     // @access  Private
     async getUserProfile(req, res) {
         try {
-            const user = await UserModel.findById(req.user._id).select('-password');
+            const user = await UserModel.findByIdSelect(req.user._id, '-password');
             if (user) {
                 res.json(user);
             } else {
